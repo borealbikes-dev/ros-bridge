@@ -413,10 +413,12 @@ def main(args=None):
 
         # check carla version
         dist = pkg_resources.get_distribution("carla")
-        if LooseVersion(dist.version) != LooseVersion(CarlaRosBridge.CARLA_VERSION):
-            carla_bridge.logfatal("CARLA python module version {} required. Found: {}".format(
-                CarlaRosBridge.CARLA_VERSION, dist.version))
-            sys.exit(1)
+        # FIX 0.9.13 compatibility by removing check
+        # https://github.com/carla-simulator/ros-bridge/issues/608#issuecomment-1104055866
+        #if LooseVersion(dist.version) != LooseVersion(CarlaRosBridge.CARLA_VERSION):
+        #    carla_bridge.logfatal("CARLA python module version {} required. Found: {}".format(
+        #        CarlaRosBridge.CARLA_VERSION, dist.version))
+        #    sys.exit(1)
 
         if LooseVersion(carla_client.get_server_version()) != \
            LooseVersion(carla_client.get_client_version()):
