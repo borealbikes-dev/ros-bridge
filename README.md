@@ -1,3 +1,10 @@
+# Fixes Implemented in Borealbikes Fork
+
+1. https://github.com/carla-simulator/ros-bridge/issues/608#issuecomment-1104055866
+2. https://github.com/carla-simulator/ros-bridge/pull/613/commits/5e36ba502029638747d6b8f8bfe1d67a10406d9a
+
+I don't know why they haven't been pushed to upstream, so I made this fork.
+
 # ROS/ROS2 bridge for CARLA simulator
 
 [![Actions Status](https://github.com/carla-simulator/ros-bridge/workflows/CI/badge.svg)](https://github.com/carla-simulator/ros-bridge)
