@@ -1,7 +1,9 @@
 # Fixes Implemented in Borealbikes Fork
 
-1. https://github.com/carla-simulator/ros-bridge/issues/608#issuecomment-1104055866
-2. https://github.com/carla-simulator/ros-bridge/pull/613/commits/5e36ba502029638747d6b8f8bfe1d67a10406d9a
+1. Skip version check to allow 0.9.13. https://github.com/carla-simulator/ros-bridge/issues/608#issuecomment-1104055866
+2. A Python error in a package that doesn't use Python, so change build system to ament_cmake. https://github.com/carla-simulator/ros-bridge/pull/613/commits/5e36ba502029638747d6b8f8bfe1d67a10406d9a
+3. Remove some over-eager configuration arguments in `carla_ros_bridge/launch/carla_ros_bridge.launch.py` and `carla_ros_bridge/src/carla_ros_bridge/bridge.py, so that it doesn't change any CARLA world settings, and doesn't crash the main server as often.
+4. Fix issue in `carla_ros_bridge/src/carla_ros_bridge/pseudo_actor.py` where it can't handle multiple sensors of the same type. The fix uses the sensor's uid to create new ROS topics for each actual sensor.
 
 I don't know why they haven't been pushed to upstream, so I made this fork.
 
