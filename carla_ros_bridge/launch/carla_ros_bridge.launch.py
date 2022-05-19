@@ -16,17 +16,17 @@ def generate_launch_description():
         ),
         launch.actions.DeclareLaunchArgument(
             name='timeout',
-            default_value='2',
+            default_value='5',
             description='Time to wait for a successful connection to the CARLA server'
         ),
         launch.actions.DeclareLaunchArgument(
             name='passive',
-            default_value='False',
+            default_value='True',
             description='When enabled, the ROS bridge will take a backseat and another client must tick the world (only in synchronous mode)'
         ),
         launch.actions.DeclareLaunchArgument(
             name='synchronous_mode',
-            default_value='True',
+            default_value='False',
             description='Enable/disable synchronous mode. If enabled, the ROS bridge waits until the expected data is received for all sensors'
         ),
         launch.actions.DeclareLaunchArgument(
@@ -34,16 +34,18 @@ def generate_launch_description():
             default_value='False',
             description='When enabled, pauses the tick until a vehicle control is completed (only in synchronous mode)'
         ),
-        launch.actions.DeclareLaunchArgument(
-            name='fixed_delta_seconds',
-            default_value='0.05',
-            description='Simulation time (delta seconds) between simulation steps'
-        ),
-        launch.actions.DeclareLaunchArgument(
-            name='town',
-            default_value='Town01',
-            description='Either use an available CARLA town (eg. "Town01") or an OpenDRIVE file (ending in .xodr)'
-        ),
+        # Jason Sohn of Boreal Bikes:
+        # These arguments have been removed to avoid ROS bridge from changing pre-existing CARLA world.
+#        launch.actions.DeclareLaunchArgument(
+#            name='fixed_delta_seconds',
+#            default_value='0.03',
+#            description='Simulation time (delta seconds) between simulation steps'
+        #),
+#        launch.actions.DeclareLaunchArgument(
+#            name='town',
+#            default_value='Town10HD_Opt',
+#            description='Either use an available CARLA town (eg. "Town01") or an OpenDRIVE file (ending in .xodr)'
+#        ),
         launch.actions.DeclareLaunchArgument(
             name='register_all_sensors',
             default_value='True',
@@ -84,12 +86,12 @@ def generate_launch_description():
                 {
                     'synchronous_mode_wait_for_vehicle_control_command': launch.substitutions.LaunchConfiguration('synchronous_mode_wait_for_vehicle_control_command')
                 },
-                {
-                    'fixed_delta_seconds': launch.substitutions.LaunchConfiguration('fixed_delta_seconds')
-                },
-                {
-                    'town': launch.substitutions.LaunchConfiguration('town')
-                },
+#                {
+#                    'fixed_delta_seconds': launch.substitutions.LaunchConfiguration('fixed_delta_seconds')
+#                },
+#                {
+#                    'town': launch.substitutions.LaunchConfiguration('town')
+#                },
                 {
                     'register_all_sensors': launch.substitutions.LaunchConfiguration('register_all_sensors')
                 },

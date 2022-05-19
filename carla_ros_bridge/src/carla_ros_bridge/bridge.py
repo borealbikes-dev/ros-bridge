@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #
 # Copyright (c) 2018-2020 Intel Corporation
 #
@@ -413,8 +413,6 @@ def main(args=None):
 
         # check carla version
         dist = pkg_resources.get_distribution("carla")
-        # FIX 0.9.13 compatibility by removing check
-        # https://github.com/carla-simulator/ros-bridge/issues/608#issuecomment-1104055866
         #if LooseVersion(dist.version) != LooseVersion(CarlaRosBridge.CARLA_VERSION):
         #    carla_bridge.logfatal("CARLA python module version {} required. Found: {}".format(
         #        CarlaRosBridge.CARLA_VERSION, dist.version))
@@ -429,19 +427,19 @@ def main(args=None):
 
         carla_world = carla_client.get_world()
 
-        if "town" in parameters and not parameters['passive']:
-            if parameters["town"].endswith(".xodr"):
-                carla_bridge.loginfo(
-                    "Loading opendrive world from file '{}'".format(parameters["town"]))
-                with open(parameters["town"]) as od_file:
-                    data = od_file.read()
-                carla_world = carla_client.generate_opendrive_world(str(data))
-            else:
-                if carla_world.get_map().name != parameters["town"]:
-                    carla_bridge.loginfo("Loading town '{}' (previous: '{}').".format(
-                        parameters["town"], carla_world.get_map().name))
-                    carla_world = carla_client.load_world(parameters["town"])
-            carla_world.tick()
+        #if "town" in parameters and not parameters['passive']:
+        #    if parameters["town"].endswith(".xodr"):
+        #        carla_bridge.loginfo(
+        #            "Loading opendrive world from file '{}'".format(parameters["town"]))
+        #        with open(parameters["town"]) as od_file:
+        #            data = od_file.read()
+        #        carla_world = carla_client.generate_opendrive_world(str(data))
+        #    else:
+        #        if carla_world.get_map().name != parameters["town"]:
+        #            carla_bridge.loginfo("Loading town '{}' (previous: '{}').".format(
+        #                parameters["town"], carla_world.get_map().name))
+        #            carla_world = carla_client.load_world(parameters["town"])
+        #    carla_world.tick()
 
         carla_bridge.initialize_bridge(carla_client.get_world(), parameters)
 

@@ -88,9 +88,14 @@ class PseudoActor(object):
         :rtype: string
         """
         if self.parent is not None:
-            return self.parent.get_prefix() + "/" + self.name
+            # FIXES issue where multiple sensors of the same type get assigned the same name
+            # This fix uses the sensor's uid to create a new ROS topic for each individual sensor
+            #return self.parent.get_prefix() + "/" + self.name
+            return self.parent.get_prefix() + "/" + self.name + "/" + "id" + str(self.uid)
         else:
-            return self.name
+            #return self.name
+            return self.name + "/" + "id" + str(self.uid)
+
 
     def get_topic_prefix(self):
         """
